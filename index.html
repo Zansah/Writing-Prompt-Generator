@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Writing Prompt Generator</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #1a1a1ac9 url('image.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      background-color: #1a1a1a;
+    }
+    .writing-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .title {
+      font-size: 2rem;
+      margin-bottom: 20px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    .form-group {
+      margin: 10px 0;
+    }
+    select, .form-input {
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #fff;
+      padding: 8px 10px;
+      color: #fff;
+      font-size: 1rem;
+      width: 300px;
+    }
+    select:focus, .form-input:focus {
+      outline: none;
+      border-bottom: 1px solid #00ff99;
+    }
+    .button {
+      margin-top: 20px;
+      background-color: #00ff99;
+      border: none;
+      padding: 10px 20px;
+      font-size: 1rem;
+      color: #1a1a1a;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .button:hover {
+      background-color: #00cc77;
+    }
+    .checkbox label {
+      display: flex;
+      align-items: center;
+      margin-top: 20px;
+    }
+    .checkbox input {
+      margin-right: 5px;
+    }
+    .other-link {
+      color: #00ff99;
+      text-decoration: none;
+      margin-top: 20px;
+    }
+    .other-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="writing-container">
+    <div class="black-background"></div>
+    <h1 class="title">Writing Prompt Generator</h1>
+    <div class="form-group">
+      <select id="genre-select">
+        <option value="" disabled selected>Choose a Genre</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Science Fiction">Science Fiction</option>
+        <option value="Mystery">Mystery</option>
+        <option value="Romance">Romance</option>
+        <option value="Thriller">Thriller</option>
+        <option value="Dystopian">Dystopian</option>
+        <option value="Historical Fiction">Historical Fiction</option>
+        <option value="Adventure">Adventure</option>
+        <option value="Magical Realism">Magical Realism</option>
+        <option value="Horror">Horror</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <select id="mood-select">
+        <option value="" disabled selected>Choose a Mood</option>
+        <option value="Carefree">Carefree</option>
+        <option value="Festive">Festive</option>
+        <option value="sad">sad</option>
+        <option value="dark">Dark</option>
+        <option value="hopeful">Hopeful</option>
+        <option value="Lighthearted">Lighthearted</option>
+        <option value="tense">Tense</option>
+        <option value="heartwarming">Heartwarming</option>
+        <option value="mysterious">Mysterious</option>
+        <option value="adventurous">Adventurous</option>
+      </select>
+    </div>
+    <button class="button">Generate Prompt</button>
+    <div class="checkbox">
+      <label><input type="checkbox"> Include Characters</label>
+    </div>
+    <a href="https://zansah.github.io/potential/" class="other-link">Other Projects</a>
+  </div>
+
+  <script>
+    const genres = [
+      'Fantasy', 'Science Fiction', 'Mystery', 'Romance', 
+      'Thriller', 'Dystopian', 'Historical Fiction', 
+      'Adventure', 'Magical Realism', 'Horror'
+    ];
+    const moods = [
+      'Carefree', 'Festive', 'sad', 'dark', 
+      'hopeful', 'Lighthearted', 'tense', 'heartwarming', 
+      'mysterious', 'adventurous'
+    ];
+    const events = [
+      'a magical school year', 'a rebellion against an oppressive government', 
+      'a journey to destroy a powerful artifact', 'a battle against a dark force', 
+      'a crime investigation', 'a discovery of a hidden world', 
+      'a forbidden romance', 'a fight for survival', 
+      'a clash between ideologies', 'a journey to find lost family'
+    ];
+    const characters = [
+      'a reluctant hero stepping into greatness', 'a wise mentor with a mysterious past', 
+      'a strong and determined heroine', 'a morally complex anti-hero', 
+      'a cunning strategist', 'a sick orphan', 
+      'a man steel', 'a villain with a sad backstory', 
+      'a genius detective solving impossible cases', 'a lost soul seeking redemption'
+    ];
+
+    function generatePrompt() {
+      const genreInput = document.getElementById('genre-select').value || randomItem(genres);
+      const moodInput = document.getElementById('mood-select').value || randomItem(moods);
+      const includeCharacters = document.querySelector('.checkbox input').checked;
+      let template = `Write a ${genreInput} story where the protagonist feels ${moodInput} emotions during ${randomItem(events)}.`;
+      
+      if (includeCharacters) {
+        template += ` The main character is ${randomItem(characters)}.`;
+      }
+      alert(template);
+    }
+
+    function randomItem(array) {
+      return array[Math.floor(Math.random() * array.length)];
+    }
+
+    document.querySelector('.button').addEventListener('click', generatePrompt);
+  </script>
+</body>
+</html>
